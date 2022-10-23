@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> Dex URI Scraper </title>
+  <meta name="Generator" content="NPP-Plugin">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <style>
+  input[name=dex_uri] { width:500px; }
+  #links { width:100%; }
+  </style>
+ </head>
+ <body>
+ 
+<center>
+<h4>Enter Web Address of the DEX &amp; the HTML source-code</h4>
+<input type="text" name="dex_uri" placeholder="Web Adddress (Ending in /)"/> 
+<br/>
+<textarea id="html" cols="50" rows="15" placeholder="HTML Source-Code"></textarea>
+<br/>
+<button type="submit" id="submit">Submit</button>
+<br>
+<textarea id="links" cols="150" rows="20" placeholder="Generated Links Here"></textarea>
+ </center>
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  var links = [];
+    $("#links").hide();
+
+	$('#submit').on('click', function(){
+	links = [];
+		var val = $('#html').val();
+		var uri = $('input[name=dex_uri]').val();
+		
+		$('a', val).each(function(){
+			links.push(uri + $(this).attr('href'));
+		});
+		
+		$("#links").val(links.join('\n'));
+		$("#links").fadeIn("slow");
+	});
+});
+  </script>
+ </body>
+</html>
